@@ -17,6 +17,7 @@ export default () => {
         const result = await getLocation();
         if (result.data) {
             data.current = result.data;
+            localStorage.setItem('cityid', (data.current as any).CityID)
         }
     }
 

@@ -4,19 +4,20 @@ import {getDealerList} from '@/api/index'
 
 export default () => {
     const data = reactive({
-        dealerList: []
+        dealerList: [],
     })
-
+    // 获取经销商列表
     async function getDealerListAction(carId: string, cityId: string) {
-        const result: any = await getDealerList(carId, cityId);
-        // if (result.data) {
-
-        // }
+        console.log(carId, cityId)
+        const result = await getDealerList(carId, cityId);
+        if (result.data) {
+            data.dealerList = result.data
+        }
     }
 
 
     return {
         ...toRefs(data),
-        getDealerListAction
+        getDealerListAction,
     }
 }
