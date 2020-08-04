@@ -11,6 +11,6 @@ export let getModelImageYearColor = (SerialID: string) => {
 }
 
 // 获取车系图片分类列表
-export let getCategoryImageList = (SerialID: string, ImageID: string, Page: number= 0, PageSize: number= 30) => {
+export let getCategoryImageList = (SerialID: string, ImageID: number, Page: number= 0, PageSize: number= 30) => {
     return request.get('/v2-car-getCategoryImageList.html', {params: {SerialID, ImageID, Page, PageSize}});
 }

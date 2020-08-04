@@ -12,7 +12,7 @@
           :key="value.Url"
           :style="{backgroundImage: `url(${value.Url.replace('{0}', value.LowSize)})`}"
         >
-          <p v-if="!key">
+          <p v-if="!key" @click="clickCategory(item.Id)">
             <span>{{item.Name}}</span>
             <span>{{item.Count}}张></span>
           </p>
@@ -35,6 +35,14 @@
     <transition name="slideup">
       <color-type v-if="showCarColor" :selectColor="selectColor"></color-type>
     </transition>
+
+    <!-- 图片列表组件 -->
+    <transition name="slideup">
+      <image-list v-if="showImageList" :SerialID="id" :imageID="Number(imageID)"></image-list>
+    </transition>
+
+    <!-- 轮播组件 -->
+    
   </div>
 </template>
 
@@ -42,34 +50,32 @@
 import { defineComponent, onMounted, Ref, ref } from "@vue/composition-api";
 import CarType from "@/components/carType.vue";
 import ColorType from "@/components/colorType.vue";
+import ImageList from '@/components/imageList.vue';
+
 import useImg from "@/hooks/useImg";
 
 export default defineComponent({
   components: {
     CarType,
-    ColorType
+    ColorType,
+    ImageList,
   },
-  setup(
-    props,
-    {
-      root: {
-        $route: {
-          params: { id },
-        },
-      },
-    }
-  ) {
+  setup(props, {root}) {
     const { getImageListAction, setSerialID, imgList, setCarID, setColorID } = useImg();
+    const id = root.$route.params.id;
     setSerialID(id);
     getImageListAction();
+    // 控制组件的显示隐藏
     const showCarType: Ref<boolean> = ref(false);
     const showCarColor: Ref<boolean> = ref(false);
+    const showImageList: Ref<boolean> = ref(false);
+
     const showTypeText: Ref<string> = ref('车款');
     const showColorText: Ref<string> = ref('全部颜色');
+    const imageID: Ref<string> = ref('');
 
     function selectCar(item: any) {
       showCarType.value = false;
-      console.log('item...', item);
       if (item) {
         showTypeText.value = `${item.market_attribute.year}款 ${item.car_name}`
         setCarID(item.car_id);
@@ -90,14 +96,23 @@ export default defineComponent({
       }
     }
 
+    function clickCategory(id: string) {
+      showImageList.value = true;
+      imageID.value = id;
+    }
+
     return {
+      id,
       imgList,
       showCarType,
       showCarColor,
+      showImageList,
       showTypeText,
       showColorText,
       selectCar,
       selectColor,
+      imageID,
+      clickCategory
     };
   },
 });

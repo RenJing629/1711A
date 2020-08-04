@@ -1,5 +1,5 @@
 import { reactive, toRefs, watch } from '@vue/composition-api';
-import { getImageList, getModelImageYearColor } from '@/api';
+import { getImageList, getModelImageYearColor, getCategoryImageList } from '@/api';
 
 export default () => {
     const data = reactive({
@@ -52,6 +52,14 @@ export default () => {
         }
     }
 
+    async function getCategoryImageListAction(SerialID: string, ImageID: number, page: number) {
+        const result = await getCategoryImageList(SerialID, ImageID, page);
+        if (result.data) {
+            data.categoryImgList = data.categoryImgList.concat(result.data.List);
+            data.page = result.data.Page;
+        }
+    }
+
 
     return {
         ...toRefs(data),
@@ -59,6 +67,7 @@ export default () => {
         setColorID,
         setCarID,
         getImageListAction,
-        getModelImageYearColorAction
+        getModelImageYearColorAction,
+        getCategoryImageListAction
     }
 }
