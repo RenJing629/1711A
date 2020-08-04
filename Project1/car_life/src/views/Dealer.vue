@@ -13,11 +13,11 @@
       </div>
       <span></span>
     </section>
+    <!-- 输入信息 -->
+    <span class="spantitle">个人信息</span>
     <!-- 车型选择组件 -->
     <transition name="slideup">
       <car-type v-if="showCarType" :selectCar="selectCar"></car-type>
-      <!-- 输入信息 -->
-    <span class="spantitle">个人信息</span>
     </transition>
     <div class="message">
           <p><span>姓名</span><input type="text" placeholder="输入你的真实姓名" name="" id=""></p>
@@ -53,7 +53,7 @@ import useDealer from "@/hooks/useDealer";
 
 import CarType from "@/components/carType.vue";
 import Location from "@/components/location.vue";
-import CarShopping from '@/components/carshopping.vue'
+import CarShopping from '@/components/carShopping.vue'
 export default defineComponent({
   components: {
     CarType,

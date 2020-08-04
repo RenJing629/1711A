@@ -11,7 +11,8 @@ export default () => {
         imgList: [],
         categoryImgList: [],
         page: 0,
-        pageSize: 30
+        pageSize: 30,
+        count: 0
     })
 
     function setSerialID(SerialID: string) {
@@ -57,6 +58,7 @@ export default () => {
         if (result.data) {
             data.categoryImgList = data.categoryImgList.concat(result.data.List);
             data.page = result.data.Page;
+            data.count = result.data.Count;
         }
     }
 

@@ -9,6 +9,7 @@
       <ul v-for="(item) in imgList" :key="item.Id">
         <li
           v-for="(value, key) in item.List"
+          @click="clickSwiper(item.Id, key)"
           :key="value.Url"
           :style="{backgroundImage: `url(${value.Url.replace('{0}', value.LowSize)})`}"
         >
@@ -20,7 +21,7 @@
       </ul>
     </section>
     <section v-else class="no-content">
-      <img src="http://h5.chelun.com/2017/official/img/no-img.png" />
+      <img src="//h5.chelun.com/2017/official/img/no-img.png" />
       <span>还没有内容</span>  
     </section> 
 
@@ -42,7 +43,12 @@
     </transition>
 
     <!-- 轮播组件 -->
-    
+    <car-swiper v-if="showSwiper" 
+      :SerialID="id" 
+      :imageID="Number(imageID)" 
+      :page="page"
+      @close="showSwiper=false"
+      :swiperIndex="swiperIndex"/>
   </div>
 </template>
 
@@ -51,6 +57,8 @@ import { defineComponent, onMounted, Ref, ref } from "@vue/composition-api";
 import CarType from "@/components/carType.vue";
 import ColorType from "@/components/colorType.vue";
 import ImageList from '@/components/imageList.vue';
+import CarSwiper from '@/components/carSwiper.vue';
+
 
 import useImg from "@/hooks/useImg";
 
@@ -59,6 +67,7 @@ export default defineComponent({
     CarType,
     ColorType,
     ImageList,
+    CarSwiper
   },
   setup(props, {root}) {
     const { getImageListAction, setSerialID, imgList, setCarID, setColorID } = useImg();
@@ -69,10 +78,13 @@ export default defineComponent({
     const showCarType: Ref<boolean> = ref(false);
     const showCarColor: Ref<boolean> = ref(false);
     const showImageList: Ref<boolean> = ref(false);
+    const showSwiper: Ref<boolean> = ref(false);
 
     const showTypeText: Ref<string> = ref('车款');
     const showColorText: Ref<string> = ref('全部颜色');
     const imageID: Ref<string> = ref('');
+    const swiperIndex: Ref<number> = ref(0);
+    const page: Ref<number> = ref(1);
 
     function selectCar(item: any) {
       showCarType.value = false;
@@ -101,18 +113,28 @@ export default defineComponent({
       imageID.value = id;
     }
 
+    function clickSwiper(id: string, index: number) {
+      imageID.value = id;
+      swiperIndex.value = index;
+      showSwiper.value = true;
+    }
+
     return {
       id,
+      page,
       imgList,
       showCarType,
       showCarColor,
       showImageList,
+      showSwiper,
       showTypeText,
       showColorText,
       selectCar,
       selectColor,
       imageID,
-      clickCategory
+      clickCategory,
+      clickSwiper,
+      swiperIndex
     };
   },
 });
