@@ -2,7 +2,8 @@
   <div class="wrap" @scroll="scroll" ref="scrollContaier">
     <ul ref="scrollElement">
       <li
-        v-for="(item) in categoryImgList"
+        v-for="(item, key) in categoryImgList"
+        @click="emit('click', imageID, key)"
         :key="item.Url"
         :style="{backgroundImage: `url(${item.Url.replace('{0}', item.LowSize)})`}"
       ></li>
@@ -30,7 +31,7 @@ export default defineComponent({
     },
   },
   setup(props: IProps, context) {
-    const { page, categoryImgList, getCategoryImageListAction } = useImg();
+    const { page, categoryImgList, getCategoryImageListAction } = useImg;
     const scrollContaier = ref();
     const scrollElement = ref();
 
@@ -66,6 +67,7 @@ export default defineComponent({
       scroll,
       scrollContaier,
       scrollElement,
+      emit: context.emit
     };
   },
 });

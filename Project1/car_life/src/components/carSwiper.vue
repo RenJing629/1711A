@@ -3,14 +3,16 @@
     <div class="swiper" @click.self="closeSwiper">
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item) in categoryImgList" :key="item.Url">
-          <img :src="item.Url.replace('{0}', item.LowSize)" class="swiper-lazy" />
-           <div class="swiper-lazy-preloader"></div>
+          <div class="swiper-zoom-container">
+           <img :src="item.Url.replace('{0}', item.LowSize)" class="swiper-lazy" />
+          </div>
+           <!-- <div class="swiper-lazy-preloader"></div> -->
         </swiper-slide>
       </swiper>
     </div>
     <footer>
       <p>{{`${curSwiperIndex}/${count}`}}</p>
-      <button>询问底价</button>
+      <button @click="goDealer">询问底价</button>
     </footer>
   </div>
 </template>
@@ -43,7 +45,8 @@ export default defineComponent({
       count,
       categoryImgList,
       getCategoryImageListAction,
-    } = useImg();
+      CarId
+    } = useImg;
     const curSwiperIndex = ref(props.swiperIndex);
     const mySwiper = ref();
     const swiper: any = computed(() => {
@@ -53,42 +56,58 @@ export default defineComponent({
         return {};
     })
     const swiperOptions = {
-        lazy: {
-            loadPrevNext: true,
-        },
         on: {
             slideChange() {
-                console.log('改变了，activeIndex为', swiper.value.activeIndex);
+                console.log('改变了，activeIndex为', categoryImgList);
                 curSwiperIndex.value = swiper.value.activeIndex + 1;
+                // 预加载下一页图片
+                if (curSwiperIndex.value > categoryImgList.value.length - 2) {
+                  getCategoryImageListAction(props.SerialID, props.imageID)
+                }
             },
         },
     };
 
     onMounted(async () => {
-      await getCategoryImageListAction(props.SerialID, props.imageID, props.page);
-      Vue.nextTick(() => {
-        swiper.value.slideTo(props.swiperIndex);
-      })
+      // await getCategoryImageListAction(props.SerialID, props.imageID, props.page);
+      setTimeout(() => {
+        swiper.value.slideTo(props.swiperIndex, 0);
+      }, 0);
     });
 
     function closeSwiper() {
         context.emit('close');
     }
 
+    function goDealer() {
+      if (CarId.value) {
+        context.root.$router.push(`/dealer/${CarId.value}`)
+      } else {
+        let serialData: any = window.sessionStorage.getItem('serialData');
+
+        if (serialData) {
+          serialData = JSON.parse(serialData);
+          context.root.$router.push(`/dealer/${serialData?.list[0].car_id}`)
+        }
+      }
+    }
+
     return {
       count,
       swiper,
+      CarId,
       mySwiper,
       closeSwiper,
       categoryImgList,
       swiperOptions,
-      curSwiperIndex
+      curSwiperIndex,
+      goDealer
     };
   },
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../scss/_mixin.scss";
 
 .swiper {
@@ -102,7 +121,8 @@ export default defineComponent({
   background: #000;
   @include flex(row, center, center);
   img {
-    width: 100%;
+    width: 7.5rem;
+    height: 5rem;
   }
 }
 footer {

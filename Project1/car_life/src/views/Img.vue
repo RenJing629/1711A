@@ -9,7 +9,7 @@
       <ul v-for="(item) in imgList" :key="item.Id">
         <li
           v-for="(value, key) in item.List"
-          @click="clickSwiper(item.Id, key)"
+          @click.self="clickSwiper(item.Id, key)"
           :key="value.Url"
           :style="{backgroundImage: `url(${value.Url.replace('{0}', value.LowSize)})`}"
         >
@@ -39,7 +39,7 @@
 
     <!-- 图片列表组件 -->
     <transition name="slideup">
-      <image-list v-if="showImageList" :SerialID="id" :imageID="Number(imageID)"></image-list>
+      <image-list v-if="showImageList" :SerialID="id" :imageID="Number(imageID)" @click="clickSwiper"></image-list>
     </transition>
 
     <!-- 轮播组件 -->
@@ -70,7 +70,7 @@ export default defineComponent({
     CarSwiper
   },
   setup(props, {root}) {
-    const { getImageListAction, setSerialID, imgList, setCarID, setColorID } = useImg();
+    const { getImageListAction, setSerialID, imgList, setCarID, setColorID } = useImg;
     const id = root.$route.params.id;
     setSerialID(id);
     getImageListAction();

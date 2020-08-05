@@ -1,7 +1,11 @@
 import { reactive, toRefs, watch } from '@vue/composition-api';
 import { getImageList, getModelImageYearColor, getCategoryImageList } from '@/api';
+import Vue from 'vue';
+// 引入composition-api
+import CompositionApi from '@vue/composition-api'
+Vue.use(CompositionApi)
 
-export default () => {
+export default (() => {
     const data = reactive({
         SerialID: '',
         CarId: '',
@@ -10,7 +14,7 @@ export default () => {
         colorList: [],
         imgList: [],
         categoryImgList: [],
-        page: 0,
+        page: 1,
         pageSize: 30,
         count: 0
     })
@@ -53,7 +57,9 @@ export default () => {
         }
     }
 
-    async function getCategoryImageListAction(SerialID: string, ImageID: number, page: number) {
+    async function getCategoryImageListAction(SerialID: string, ImageID: number, page?: number) {
+        console.log('data...', data);
+        page = page ? page : data.page;
         const result = await getCategoryImageList(SerialID, ImageID, page);
         if (result.data) {
             data.categoryImgList = data.categoryImgList.concat(result.data.List);
@@ -72,4 +78,4 @@ export default () => {
         getModelImageYearColorAction,
         getCategoryImageListAction
     }
-}
+})()
