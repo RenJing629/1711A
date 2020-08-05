@@ -39,7 +39,7 @@ export default defineComponent({
       },
     }
   ) {
-    const { colorList, getModelImageYearColorAction } = useImg();
+    const { colorList, getModelImageYearColorAction } = useImg;
     const curIndex = ref(0);
     const years = computed(() => {
       // console.log('years...', colorList, Object.keys(colorList.value))

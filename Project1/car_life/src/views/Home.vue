@@ -6,7 +6,7 @@
         <p>{{index}}</p>
         <ul>
           <li v-for="(value, key) in item" :key="key" @click="clickBrand(value.MasterID)">
-            <img :src="value.CoverPhoto" alt />
+            <img :data-src="value.CoverPhoto" alt v-lazy="'wrap'" />
             <span>{{value.Name}}</span>
           </li>
         </ul>
@@ -42,7 +42,7 @@
         <p>{{item.GroupName}}</p>
         <ul>
           <router-link tag="li" :to="`/detail/${value.SerialID}`" v-for="(value) in item.GroupList" :key="value.SerialID">
-            <img :src="value.Picture" alt />
+            <img :data-src="value.Picture" alt v-lazy="'popup'"/>
             <div>
               <p>{{value.AliasName}}</p>
               <p>{{value.DealerPrice}}</p>

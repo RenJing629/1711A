@@ -10,6 +10,8 @@ import CompositionApi from '@vue/composition-api'
 // 引入vant
 import Vant, { Toast } from 'vant';
 import 'vant/lib/index.css';
+// 挂载自定义指令
+import '@/directive/lazyload';
 // loading组件
 import loading from '@/components/loading.ts'
 // 在原型链上挂载

@@ -4,9 +4,9 @@
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item) in categoryImgList" :key="item.Url">
           <div class="swiper-zoom-container">
-           <img :src="item.Url.replace('{0}', item.LowSize)" class="swiper-lazy" />
+           <img :data-src="item.Url.replace('{0}', item.LowSize)" class="swiper-lazy" />
+           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
           </div>
-           <!-- <div class="swiper-lazy-preloader"></div> -->
         </swiper-slide>
       </swiper>
     </div>
@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref, computed } from "@vue/composition-api";
 import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
-import "swiper/swiper.scss";
+import "swiper/css/swiper.min.css";
 import useImg from "@/hooks/useImg";
 import Vue from 'vue';
 
@@ -56,8 +56,10 @@ export default defineComponent({
         return {};
     })
     const swiperOptions = {
+        lazy: true,
+        zoom : true,
         on: {
-            slideChange() {
+          slideChange() {
                 console.log('改变了，activeIndex为', categoryImgList);
                 curSwiperIndex.value = swiper.value.activeIndex + 1;
                 // 预加载下一页图片
