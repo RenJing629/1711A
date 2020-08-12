@@ -2,7 +2,7 @@
   <div v-if="Object.keys(serialDetail).length">
     <section class="header">
       <router-link tag="div" :to="`/img/${id}`" class="img">
-        <img :src="serialDetail.CoverPhoto.replace('{0}', '3')" alt />
+        <img :src="serialDetail.CoverPhoto.replace('{0}', '3').replace('http:', '')" alt />
         <span>{{serialDetail.pic_group_count}}张照片</span>
       </router-link>
       <div class="price">

@@ -5,7 +5,7 @@
         v-for="(item, key) in categoryImgList"
         @click="emit('click', imageID, key)"
         :key="item.Url"
-        :style="{backgroundImage: `url(${item.Url.replace('{0}', item.LowSize)})`}"
+        :style="{backgroundImage: `url(${item.Url.replace('{0}', item.LowSize).replace('http:', '')})`}"
       ></li>
     </ul>
   </div>

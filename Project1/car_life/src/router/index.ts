@@ -2,10 +2,14 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
 // 引入路由组件
-import Home from '@/views/Home.vue';
-import Detail from '@/views/Detail.vue';
-import Dealer from '@/views/Dealer.vue';
-import Img from '@/views/Img.vue';
+// import Home from '@/views/Home.vue';
+// import Detail from '@/views/Detail.vue';
+// import Dealer from '@/views/Dealer.vue';
+// import Img from '@/views/Img.vue';
+const Home = () => import('@/views/Home.vue')
+const Detail = () => import('@/views/Detail.vue')
+const Dealer = () => import('@/views/Dealer.vue')
+const Img = () => import('@/views/Img.vue')
 
 
 Vue.use(VueRouter);

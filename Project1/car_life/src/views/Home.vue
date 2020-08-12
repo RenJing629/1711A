@@ -6,7 +6,7 @@
         <p>{{index}}</p>
         <ul>
           <li v-for="(value, key) in item" :key="key" @click="clickBrand(value.MasterID)">
-            <img :data-src="value.CoverPhoto" alt v-lazy="'wrap'" />
+            <img :data-src="value.CoverPhoto.replace('http:', '')" alt v-lazy="'wrap'" />
             <span>{{value.Name}}</span>
           </li>
         </ul>

@@ -6,7 +6,7 @@
        <img src="//h5.chelun.com/2017/official/img/icon-help.png" />
     </header>
     <section class="header" @click="showSelectCar">
-      <img :src="serialDetail.Picture" alt />
+      <img v-if="serialDetail.Picture" :src="serialDetail.Picture.replace('http:', '')" alt />
       <div class="carname">
         <p>{{car.AliasName?car.AliasName: serialDetail.AliasName}}</p>
         <p>{{car.car_name?car.car_name: carDetail.car_name}}</p>

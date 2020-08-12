@@ -11,7 +11,7 @@
           v-for="(value, key) in item.List"
           @click.self="clickSwiper(item.Id, key)"
           :key="value.Url"
-          :style="{backgroundImage: `url(${value.Url.replace('{0}', value.LowSize)})`}"
+          :style="{backgroundImage: `url(${value.Url.replace('{0}', value.LowSize).replace('http:', '')})`}"
         >
           <p v-if="!key" @click="clickCategory(item.Id)">
             <span>{{item.Name}}</span>

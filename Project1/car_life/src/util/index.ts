@@ -9,6 +9,8 @@ export function debounce(func: (...reset: any) => any, ms: number= 150) {
     }
 }
 
+
+
 // 节流
 export function throttle(func: (...reset: any) => any, ms: number= 150) {
     let start = +new Date();

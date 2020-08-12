@@ -3,7 +3,7 @@ import {Toast} from 'vant'
 import loading from '@/components/loading.ts'
 
 const instance = axios.create({
-    baseURL: '//baojia.chelun.com',
+    baseURL: process.env.NODE_ENV === 'production' ? '//baojia.chelun.com' : process.env.NODE_ENV === 'pre_production' ? '' : '//baojia.chelun.com',
     timeout: 3000,
 });
 

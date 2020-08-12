@@ -4,7 +4,7 @@
       <swiper ref="mySwiper" :options="swiperOptions">
         <swiper-slide v-for="(item) in categoryImgList" :key="item.Url">
           <div class="swiper-zoom-container">
-           <img :data-src="item.Url.replace('{0}', item.LowSize)" class="swiper-lazy" />
+           <img :data-src="item.Url.replace('{0}', item.LowSize).replace('http:', '')" class="swiper-lazy" />
            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
           </div>
         </swiper-slide>

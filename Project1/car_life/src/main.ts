@@ -9,13 +9,21 @@ import '@/scss/_reset.scss';
 import CompositionApi from '@vue/composition-api'
 // 引入vant
 import Vant, { Toast } from 'vant';
-import 'vant/lib/index.css';
+// import 'vant/lib/index.css';
 // 挂载自定义指令
 import '@/directive/lazyload';
+// 引入no-console
+const noc = require('no-console');
+
 // loading组件
 import loading from '@/components/loading.ts'
+if (process.env.NODE_ENV === 'production') {
+  noc();
+}
 // 在原型链上挂载
 Vue.prototype.$loading = loading;
+
+
 
 Vue.use(Vant);
 Vue.use(CompositionApi)

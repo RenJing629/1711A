@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <transition name="router">
+    <router-view></router-view>
+  </transition>
 </template>
 
 
@@ -66,5 +68,23 @@ body {
   .mask {
     transition: opacity .3s linear;
   }
+}
+// 路由过渡效果
+.router-enter{
+  opacity: 0;
+  transform: translateX(100%);
+}
+.router-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.router-enter-to,
+.router-leave {
+  transform: translateX(0);
+  opacity: 1;
+}
+.router-enter-active,
+.router-leave-active {
+  transition: all 0.3s linear;
 }
 </style>
