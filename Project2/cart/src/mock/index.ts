@@ -13,12 +13,11 @@ const {list} = Mock.mock({
     }]
 })
 
-console.log('list...', list);
 
-Mock.mock('/list', 'get', ()=>{
+Mock.mock('/api/list', 'get', ()=>{
     return {list};
 })
 
-Mock.mock('*', 'GET', function(){
-    console.log('arguments...', arguments)
-})
+// Mock.mock(/\w/, 'get', function(){
+//     console.log('arguments...', arguments)
+// })
