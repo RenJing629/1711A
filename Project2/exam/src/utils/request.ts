@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from './index';
 
 let instance = axios.create({
     baseURL: "http://127.0.0.1:7002",
@@ -8,8 +9,8 @@ let instance = axios.create({
 instance.interceptors.request.use(function (config: any) {
     // 在发送请求之前做些什么
     let writePath = ['/user/login'];
-    if (!writePath.includes(config.url)) {
-        config.headers.authorization = window.sessionStorage.getItem('token')
+    if (!writePath.includes(config.url) && getToken()) {
+        config.headers.authorization = getToken();
     }
     return config;
 }, function (error) {
@@ -21,8 +22,7 @@ instance.interceptors.request.use(function (config: any) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-
-    return response;
+    return response.data;
 }, function (error) {
     switch (error.response.status) {
         case 401:

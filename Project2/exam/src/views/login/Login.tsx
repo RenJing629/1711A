@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './login.module.scss';
+import styles from './Login.module.scss';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import useStore from '../../context/useStore'
@@ -35,7 +35,7 @@ export default function Login() {
                     <Form.Item
                         name="username"
                         validateTrigger="onBlur"
-                        rules={[{ pattern: /^[a-z]{4,16}$/, required:true, message: 'Please input your Username!'}]}
+                        rules={[{ pattern: /^[a-z]{4,16}$/, required:true, message: '请输入你的用户名!'}]}
                     >
                         <Input prefix={<UserOutlined />} placeholder="输入用户名" />
                     </Form.Item>
@@ -43,7 +43,7 @@ export default function Login() {
                         name="password"
                         validateTrigger="onBlur"
                         rules={[{ pattern: /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)(?=.*?[#@*!&.]).*$/
-                            , message: 'Please input your Password!', required: true}]}
+                            , message: '请输入你的密码!', required: true}]}
                     >
                         <Input
                             prefix={<LockOutlined />}
