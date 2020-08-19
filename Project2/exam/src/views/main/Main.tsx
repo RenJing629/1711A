@@ -9,9 +9,17 @@ import MyMenu from '../../components/layout/MyMenu'
 // 引入路由
 import ShowConsumer from '../../views/main/consumer/ShowConsumer'
 
+// 引入路由配置
+import RouterView from '../../router/RouterView';
+import { IRouterItem } from '../../utils/interface';
+
 const {Content} = Layout
 
-const MainPage: React.FC<any> = (props)=>{
+
+interface IProps{
+    routes: IRouterItem[]
+}
+const MainPage: React.FC<IProps> = (props)=>{
     return  <Layout>
         <MyHeader></MyHeader>
         <Layout>
@@ -26,7 +34,8 @@ const MainPage: React.FC<any> = (props)=>{
                     minHeight: 280,
                 }}
                 >
-                    <Route path="/main/showConsumer" component={ShowConsumer}></Route>
+                    {/* <Route path="/main/showConsumer" component={ShowConsumer}></Route> */}
+                    <RouterView routes={props.routes}></RouterView>
                 </Content>
             </Layout>
         </Layout>

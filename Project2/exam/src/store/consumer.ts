@@ -21,7 +21,7 @@ class Consumer{
     async getConsumerListAction(){
         let result = await getConsumerList();
         if (result.data){
-            this.consumerList = result.data;
+            this.consumerList = result.data.data;
         }
     }
 
@@ -29,7 +29,7 @@ class Consumer{
     async getIdentifyListAction(){
         let result = await getIdentifyList();
         if (result.data){
-            this.identifyList = result.data;
+            this.identifyList = result.data.data;
         }
     }
 
@@ -37,7 +37,7 @@ class Consumer{
     async getApiAuthorityAction(){
         let result = await getApiAuthority();
         if (result.data){
-            this.apiAuthorityList = result.data;
+            this.apiAuthorityList = result.data.data;
         }
     }
    
@@ -45,21 +45,21 @@ class Consumer{
     async getViewAuthorityAction(){
         let result = await getViewAuthority();
         if (result.data){
-            this.viewAuthorityList = result.data;
+            this.viewAuthorityList = result.data.data;
         }
     }
     @action
     async getIdentityApiAuthorityRelationAction(){
         let result = await getIdentityApiAuthorityRelation();
         if (result.data){
-            this.identityApiAuthorityRelation = result.data;
+            this.identityApiAuthorityRelation = result.data.data;
         }
     }
     @action
     async getIdentityViewAuthorityRelationAction(){
         let result = await getIdentityViewAuthorityRelation();
         if (result.data){
-            this.identityViewAuthorityRelation = result.data;
+            this.identityViewAuthorityRelation = result.data.data;
         }
     }
 }

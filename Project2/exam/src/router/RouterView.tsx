@@ -62,4 +62,26 @@
 
 // export default RouterView;
 
-export default {}
+
+import React from 'react'
+import { IRouterItem } from '../utils/interface';
+import { Switch, Route } from 'react-router-dom';
+
+interface IProps {
+    routes: IRouterItem[]
+}
+const RouterView: React.FC<IProps> = (props) => {
+    return <Switch>{
+        props.routes.map((item, index) => {
+            return <Route path={item.path} render={routeProps => {
+                if (item.children) {
+                    return <item.component routes={item.children} {...routeProps} meta={item.meta}></item.component>
+                } else {
+                    return <item.component {...routeProps} meta={item.meta}></item.component>
+                }
+            }}></Route>
+        })
+    }</Switch>
+}
+
+export default RouterView;

@@ -1,5 +1,27 @@
 import { UserOutlined, LaptopOutlined, NotificationOutlined, BellOutlined, CommentOutlined } from '@ant-design/icons'
 
+// 试题管理
+import AddQuestionPage from '../views/main/question/AddQuestion'
+import ClassifyQuestionPage from '../views/main/question/ClassifyQuestion'
+import QuestionDetailPage from '../views/main/question/QuestionDetail'
+import ViewQuestionPage from '../views/main/question/ViewQuestion'
+// 班级管理
+import ClassManagerPage from '../views/main/class/ClassManager'
+import RoomManagerPage from '../views/main/class/RoomManager'
+import StudentManagerPage from '../views/main/class/StudentManager'
+// 用户管理
+import AddConsumerPage from '../views/main/consumer/AddConsumer'
+import ShowConsumerPage from '../views/main/consumer/ShowConsumer'
+// 试卷管理
+import AddPaperPage from '../views/main/paper/AddPaper'
+import PaperDetailPage from '../views/main/paper/PaperDetail'
+import PaperListPage from '../views/main/paper/PaperList'
+// 阅卷管理
+import MarkingDetailPage from '../views/main/marking/MarkingDetail'
+import MarkingListPage from '../views/main/marking/MarkingList'
+import MarkingStudentListPage from '../views/main/marking/MarkingStudentList'
+
+
 const menus = [{
     name: '试题管理',
     meta: {
@@ -12,28 +34,32 @@ const menus = [{
         name: '添加试题',
         meta: {
             title: '添加试题',
-            show: true
+            show: true,
+            component: AddQuestionPage
         },
     },{
         path: '/main/classifyQuestion',
         name: '试题分类',
         meta: {
             title: '试题分类',
-            show: true
+            show: true,
+            component: ClassifyQuestionPage
         },
     },{
         path: '/main/questionDetail',
         name: '试题详情',
         meta: {
             title: '试题详情',
-            show: false
+            show: false,
+            component: QuestionDetailPage
         },
     },{
         path: '/main/viewQuestion',
         name: '查看试题',
         meta: {
             title: '查看试题',
-            show: true
+            show: true,
+            component: ViewQuestionPage
         },
     }]
 },{
@@ -48,14 +74,16 @@ const menus = [{
         name: '添加用户',
         meta: {
             title: '添加用户',
-            show: true
+            show: true,
+            component: AddConsumerPage
         },
     },{
         path: '/main/showConsumer',
         name: '用户展示',
         meta: {
             title: '用户展示',
-            show: true
+            show: true,
+            component: ShowConsumerPage
         },
     }]
 },{
@@ -70,28 +98,24 @@ const menus = [{
         name: '添加考试',
         meta: {
             title: '添加考试',
-            show: true
+            show: true,
+            component: AddPaperPage
         },
     },{
         path: '/main/paperDetail',
         name: '考试详情',
         meta: {
             title: '考试详情',
-            show: false
+            show: false,
+            component: PaperDetailPage
         },
     },{
         path: '/main/paperList',
         name: '试卷列表',
         meta: {
             title: '试卷列表',
-            show: true
-        },
-    },{
-        path: '/main/viewQuestion',
-        name: '查看试题',
-        meta: {
-            title: '查看试题',
-            show: true
+            show: true,
+            component: PaperListPage
         },
     }]
 },{
@@ -106,21 +130,24 @@ const menus = [{
         name: '班级管理',
         meta: {
             title: '班级管理',
-            show: true
+            show: true,
+            component: ClassManagerPage
         },
     },{
         path: '/main/roomManager',
         name: '教室管理',
         meta: {
             title: '教室管理',
-            show: true
+            show: true,
+            component: RoomManagerPage
         },
     },{
         path: '/main/studentManager',
         name: '学生管理',
         meta: {
             title: '学生管理',
-            show: true
+            show: true,
+            component: StudentManagerPage
         },
     }]
 },{
@@ -135,21 +162,24 @@ const menus = [{
         name: '批卷',
         meta: {
             title: '批卷',
-            show: false
+            show: false,
+            component: MarkingDetailPage
         },
     },{
         path: '/main/markingList',
         name: '待批班级',
         meta: {
             title: '待批班级',
-            show: true
+            show: true,
+            component: MarkingListPage
         },
     },{
         path: '/main/markingStudentList',
         name: '学生试卷列表',
         meta: {
             title: '学生试卷列表',
-            show: false
+            show: false,
+            component: MarkingStudentListPage
         },
     }]
 }];
