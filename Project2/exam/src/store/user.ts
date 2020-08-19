@@ -1,11 +1,14 @@
 import {observable, action} from 'mobx'
-import {login} from '../service'
+import {login, getUserInfo} from '../service'
 import {setToken, removeToken} from '../utils'
 import {useHistory} from 'react-router-dom'
 
 export default class User{
     @observable
     isLogin:boolean = false;
+    @observable
+    userInfo:any = {};
+    isGetUserInfo = false;
 
     @action 
     async loginAction(user_name: string, user_pwd: string){
@@ -24,5 +27,18 @@ export default class User{
         removeToken();
         this.isLogin = false;
         history.replace('/user/login');
+    }
+
+    @action 
+    async getUserInfoAction(){
+        if (this.isGetUserInfo){
+            return;
+        }
+        this.isGetUserInfo = true;
+        let result = await getUserInfo();
+        if (result.data){
+            this.userInfo = result.data.data;
+            this.isGetUserInfo = false;
+        }
     }
 }

@@ -20,6 +20,7 @@ export interface IMenuItem{
 export interface IRouterItem{
     path: string,
     name: string,
+    redirect?: string,
     component?: any,
     children: IRouterItem[],
     meta: {

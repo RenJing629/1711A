@@ -2,14 +2,14 @@ import React from 'react';
 import { Layout, Dropdown, Menu } from 'antd'
 import styles from './MyHeader.module.scss'
 import useStore from '../../context/useStore'
-
+import { useObserver } from 'mobx-react-lite';
 
 const { Header } = Layout;
 
 const MyHeader: React.FC = () => {
-    let {user} = useStore();
+    let { user } = useStore();
 
-    let logout = ()=>{
+    let logout = () => {
         user.logoutAction()
     }
 
@@ -31,19 +31,19 @@ const MyHeader: React.FC = () => {
           </Menu.Item>
             <Menu.Item key="3">
                 <span onClick={logout}>退出登陆</span>
-          </Menu.Item>
+            </Menu.Item>
         </Menu>
     );
 
-    return <Header className="header">
+    return useObserver(()=><Header className="header">
         <img className={styles.img} src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
         <Dropdown overlay={menu}>
             <div>
-                <img className={styles.avatar} src="" alt="" />
-                <span>chenmanjie</span>
-            </div> 
+                <img className={styles.avatar} src={user.userInfo.avatar} alt="" />
+                <span>{user.userInfo.user_name} | {user.userInfo.identity_text}</span>
+            </div>
         </Dropdown>
-    </Header >
+    </Header >)
 }
 
 export default MyHeader;

@@ -18,7 +18,7 @@ export default function Login() {
                 let arrs = item.split('=');
                 qs[arrs[0]] = arrs[1];
             });
-            history.replace(qs.redirect? qs.redirect: '/');
+            history.replace(qs.redirect? decodeURIComponent(qs.redirect): '/');
         }
     }   
    

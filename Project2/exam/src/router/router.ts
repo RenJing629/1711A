@@ -8,6 +8,7 @@ import LoginPage from '../views/login/Login';
 import MainPage from '../views/main/Main';
 // import Page403 from '../views//403/403';
 // import Page404 from '../views/404/404';
+import { Redirect } from 'react-router-dom';
 
 // 引入二级菜单
 
@@ -52,6 +53,9 @@ function geneRouter(menus: IMenuItem[]){
     })
     return routes;
 }
+function getFristChild(menus: IMenuItem[]){
+    return menus[0].children[0].path;
+}
 const routerConfig =  {
     routes: [{
         path: '/login',
@@ -60,6 +64,9 @@ const routerConfig =  {
         path: '/main',
         component: MainPage,
         children: geneRouter(menus)
+    },{
+        path: '/',
+        redirect: getFristChild(menus)
     }]
 }
 
