@@ -29,3 +29,8 @@ export interface IRouterItem{
         component: any
     }
 }
+
+export interface ITag{
+    name: string,
+    path: string
+}

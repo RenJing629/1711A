@@ -5,9 +5,9 @@ import {Route} from 'react-router-dom'
 // 引入自定义组件
 import MyHeader from '../../components/layout/MyHeader'
 import MyMenu from '../../components/layout/MyMenu'
-// import MyBreadcurmb from '../../components/layout/MyBreadCurmb'
+import MyBreadcrumb from '../../components/layout/MyBreadCrumb'
 // 引入路由
-import ShowConsumer from '../../views/main/consumer/ShowConsumer'
+// import ShowConsumer from '../../views/main/consumer/ShowConsumer'
 
 // 引入路由配置
 import RouterView from '../../router/RouterView';
@@ -25,7 +25,7 @@ const MainPage: React.FC<IProps> = (props)=>{
         <Layout>
             <MyMenu></MyMenu>
             <Layout style={{ padding: '0 24px 24px' }}>
-                {/* <MyBreadcurmb></MyBreadcurmb> */}
+                <MyBreadcrumb></MyBreadcrumb>
                 <Content
                 className="site-layout-background"
                 style={{

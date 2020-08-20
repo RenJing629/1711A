@@ -29,7 +29,7 @@ export default function Login() {
                     form={form}
                     name="normal_login"
                     className={styles.login_form}
-                    initialValues={{ remember: false }}
+                    initialValues={{ username:'chenmanjie', password: 'Chenmanjie123!', remember: false }}
                     onFinish={onFinish}
                 >
                     <Form.Item

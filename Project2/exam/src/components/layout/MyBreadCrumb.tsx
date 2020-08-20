@@ -1,12 +1,25 @@
 import React from 'react';
-import {Layout} from 'antd'
-const {Header} = Layout;
+import { Layout, Tag } from 'antd'
+import useStore from '../../context/useStore'
+import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 
-const ShowConsumer: React.FC = ()=>{
-    return  <Header className="header">
-    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt=""/>
-    
-  </Header>
+
+const { Header } = Layout;
+
+const ShowConsumer: React.FC = () => {
+  let { util } = useStore();
+  let location = useLocation();
+
+  return <section>
+    <section>{
+      util.tags.map((item, index) => {
+        return <Tag color={location.pathname === item.path ? 'red' : ''} closable key={item.path} onClose={() => util.removeTag(item)}>
+          <NavLink to={item.path}>{item.name}</NavLink>
+        </Tag>
+      })
+    }</section>
+  </section>
 }
 
 export default ShowConsumer;

@@ -29,3 +29,8 @@ export let getIdentityApiAuthorityRelation = ()=>{
 export let getIdentityViewAuthorityRelation = ()=>{
     return request.get('/user/identity_view_authority_relation');
 }
+
+// 添加用户
+export let addConsumer = (user_name:string, user_pwd:string, identity_id:string)=>{
+    return request.post('/user', {user_name, user_pwd, identity_id})
+}
