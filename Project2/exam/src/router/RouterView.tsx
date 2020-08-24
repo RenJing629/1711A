@@ -91,8 +91,11 @@ const RouterView: React.FC<IProps> = (props) => {
                     routeProps.history.replace(`/login?redirect=${encodeURIComponent(path)}`)
                 }
                 // 2. 获取用户信息
-                if (!Object.keys(user.userInfo).length){
+                if (getToken() && !Object.keys(user.userInfo).length){
+                    // 2.1 获取用户基本信息
                     user.getUserInfoAction();
+                    // 2.2 获取用户权限信息
+                    user.getUserViewAuthorityAction();
                 }
 
                 if (item.children) {

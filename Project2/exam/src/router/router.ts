@@ -44,12 +44,11 @@ import { Redirect } from 'react-router-dom';
 //     }
 
 // }
-
 function geneRouter(menus: IMenuItem[]){
     let routes: IRouterItem[] = [];
     menus.forEach(item=>{
         item.children.forEach(value=>value.component = value.meta.component)
-        routes = routes.concat(item.children as IRouterItem[]);
+        routes = routes.concat(item.children as unknown as IRouterItem[]);
     })
     return routes;
 }

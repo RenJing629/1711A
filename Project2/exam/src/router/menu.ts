@@ -35,7 +35,8 @@ const menus = [{
         meta: {
             title: '添加试题',
             show: true,
-            component: AddQuestionPage
+            component: AddQuestionPage,
+            view_id: 'main-addQuestions'
         },
     },{
         path: '/main/classifyQuestion',
@@ -43,7 +44,8 @@ const menus = [{
         meta: {
             title: '试题分类',
             show: true,
-            component: ClassifyQuestionPage
+            component: ClassifyQuestionPage,
+            view_id: 'main-questionsType'
         },
     },{
         path: '/main/questionDetail',
@@ -51,7 +53,8 @@ const menus = [{
         meta: {
             title: '试题详情',
             show: false,
-            component: QuestionDetailPage
+            component: QuestionDetailPage,
+            view_id: 'main-questionsDetail'
         },
     },{
         path: '/main/viewQuestion',
@@ -59,7 +62,8 @@ const menus = [{
         meta: {
             title: '查看试题',
             show: true,
-            component: ViewQuestionPage
+            component: ViewQuestionPage,
+            view_id: 'main-watchQuestions'
         },
     }]
 },{
@@ -75,7 +79,8 @@ const menus = [{
         meta: {
             title: '添加用户',
             show: true,
-            component: AddConsumerPage
+            component: AddConsumerPage,
+            view_id: "1main-addUser"
         },
     },{
         path: '/main/showConsumer',
@@ -83,7 +88,8 @@ const menus = [{
         meta: {
             title: '用户展示',
             show: true,
-            component: ShowConsumerPage
+            component: ShowConsumerPage,
+            view_id: "1main-showUser"
         },
     }]
 },{
@@ -99,7 +105,8 @@ const menus = [{
         meta: {
             title: '添加考试',
             show: true,
-            component: AddPaperPage
+            component: AddPaperPage,
+            view_id: "main-addExam"
         },
     },{
         path: '/main/paperDetail',
@@ -107,7 +114,8 @@ const menus = [{
         meta: {
             title: '考试详情',
             show: false,
-            component: PaperDetailPage
+            component: PaperDetailPage,
+            view_id: "main-examDetail"
         },
     },{
         path: '/main/paperList',
@@ -115,7 +123,8 @@ const menus = [{
         meta: {
             title: '试卷列表',
             show: true,
-            component: PaperListPage
+            component: PaperListPage,
+            view_id: "main-examList"
         },
     }]
 },{
@@ -131,7 +140,8 @@ const menus = [{
         meta: {
             title: '班级管理',
             show: true,
-            component: ClassManagerPage
+            component: ClassManagerPage,
+            view_id: "main-grade"
         },
     },{
         path: '/main/roomManager',
@@ -139,7 +149,8 @@ const menus = [{
         meta: {
             title: '教室管理',
             show: true,
-            component: RoomManagerPage
+            component: RoomManagerPage,
+            view_id: "main-room"
         },
     },{
         path: '/main/studentManager',
@@ -147,7 +158,8 @@ const menus = [{
         meta: {
             title: '学生管理',
             show: true,
-            component: StudentManagerPage
+            component: StudentManagerPage,
+            view_id: "main-student"
         },
     }]
 },{
@@ -163,7 +175,8 @@ const menus = [{
         meta: {
             title: '批卷',
             show: false,
-            component: MarkingDetailPage
+            component: MarkingDetailPage,
+            view_id: "main-examinationPapers"
         },
     },{
         path: '/main/markingList',
@@ -171,7 +184,8 @@ const menus = [{
         meta: {
             title: '待批班级',
             show: true,
-            component: MarkingListPage
+            component: MarkingListPage,
+            view_id: "main-examPaperClassList"
         },
     },{
         path: '/main/markingStudentList',
@@ -179,7 +193,8 @@ const menus = [{
         meta: {
             title: '学生试卷列表',
             show: false,
-            component: MarkingStudentListPage
+            component: MarkingStudentListPage,
+            view_id: "main-examPaperClassmate"
         },
     }]
 }];

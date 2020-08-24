@@ -4,6 +4,7 @@ import menus from '../../router/menu';
 import { Link } from 'react-router-dom';
 import {useLocation} from 'react-router-dom'
 import useStore from '../../context/useStore'
+import { useObserver } from 'mobx-react-lite';
 
 
 const { Sider } = Layout;
@@ -13,7 +14,7 @@ const MyMenu: React.FC = () => {
   let [openKey, setOpenKey] = useState<string>('')
   let [selectKey, setSelectKey] = useState<string>('')
 
-  let {util} = useStore();
+  let {util, user} = useStore();
   
   let location = useLocation();
   let index = menus.findIndex(item=>{
@@ -25,9 +26,12 @@ const MyMenu: React.FC = () => {
   if (location.pathname !== selectKey){
     setSelectKey(location.pathname);
   }
-  console.log('location...', location, openKey);
 
-  return <Sider width={200} className="site-layout-background">
+  function getMyMenu(){
+    return user.userViewAuthority.length? user.userViewAuthority: menus;
+  }
+
+  return useObserver(()=><Sider width={200} className="site-layout-background">
     <Menu
       mode="inline"
       theme="dark"
@@ -37,9 +41,9 @@ const MyMenu: React.FC = () => {
       // openKeys={[openKey]}
       style={{ height: '100%', borderRight: 0 }}
     >{
-        menus.map((item, index) => {
+      getMyMenu().map((item:any, index:number) => {
           return <SubMenu key={index} icon={<item.meta.icon/>} title={item.name}>{
-            item.children.map((value, key) => {
+            item.children.map((value:any) => {
               return value.meta.show && <Menu.Item key={`${value.path}`} onClick={()=>util.addTag({name:value.name, path: value.path})}>
                 <Link to={value.path}> {value.name}</Link>
               </Menu.Item>
@@ -49,7 +53,7 @@ const MyMenu: React.FC = () => {
         })
       }
     </Menu>
-  </Sider>
+  </Sider>)
 }
 
 export default MyMenu;

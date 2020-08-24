@@ -12,7 +12,8 @@ export interface IMenuItem{
         meta: {
             title: string,
             show: boolean,
-            component: any
+            component: any,
+            view_id: string
         }
     }>
 }
@@ -26,7 +27,7 @@ export interface IRouterItem{
     meta: {
         title: string,
         show: boolean,
-        component: any
+        component: any,
     }
 }
 
