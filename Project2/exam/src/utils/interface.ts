@@ -20,11 +20,11 @@ export interface IMenuItem{
 
 export interface IRouterItem{
     path: string,
-    name: string,
+    name?: string,
     redirect?: string,
     component?: any,
-    children: IRouterItem[],
-    meta: {
+    children?: IRouterItem[],
+    meta?: {
         title: string,
         show: boolean,
         component: any,

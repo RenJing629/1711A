@@ -2,7 +2,7 @@ import {observable, action} from 'mobx'
 import {login, getUserInfo} from '../service'
 import {setToken, removeToken} from '../utils'
 import {useHistory} from 'react-router-dom'
-import { getUserViewAuthority } from '../service/user';
+import { getUserViewAuthority, updateUserInfo } from '../service/user';
 import menus from '../router/menu';
 
 export default class User{
@@ -48,6 +48,12 @@ export default class User{
             this.userInfo = result.data.data;
             this.isGetUserInfo = false;
         }
+    }
+
+    @action 
+    async updateUserInfoAction(data:any){
+        let result = await updateUserInfo(data);
+        console.log('result...', result);
     }
 
     @action 

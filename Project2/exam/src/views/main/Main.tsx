@@ -1,15 +1,10 @@
 import React from 'react'
 
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {Route} from 'react-router-dom'
+import { Layout } from 'antd';
 // 引入自定义组件
 import MyHeader from '../../components/layout/MyHeader'
 import MyMenu from '../../components/layout/MyMenu'
 import MyBreadcrumb from '../../components/layout/MyBreadCrumb'
-// 引入路由
-// import ShowConsumer from '../../views/main/consumer/ShowConsumer'
-import useStore from '../../context/useStore'
-
 
 // 引入路由配置
 import RouterView from '../../router/RouterView';
@@ -22,8 +17,6 @@ interface IProps{
     routes: IRouterItem[]
 }
 const MainPage: React.FC<IProps> = (props)=>{
-    let {user} = useStore();
-
     return  <Layout>
         <MyHeader></MyHeader>
         <Layout>

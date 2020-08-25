@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layout, Dropdown, Menu } from 'antd'
+import React, { useState, useEffect } from 'react';
+import { Layout, Dropdown, Menu, Modal, Form, Button, Upload, Avatar, Input, Select} from 'antd'
 import styles from './MyHeader.module.scss'
 import useStore from '../../context/useStore'
 import { useObserver } from 'mobx-react-lite';
@@ -7,18 +7,24 @@ import { useObserver } from 'mobx-react-lite';
 const { Header } = Layout;
 
 const MyHeader: React.FC = () => {
-    let { user } = useStore();
+    let { user, consumer } = useStore();
+    let [visible, setVisible] = useState<boolean>(true);
+    let [avatar, setAvatar] = useState(user.userInfo.avatar);
 
     let logout = () => {
         user.logoutAction()
     }
 
+    // 获取所有身份
+    useEffect(()=>{
+        consumer.getIdentifyListAction();
+    }, []);
+
+    console.log('user...', user.userInfo, consumer.identifyList)
     const menu = (
         <Menu>
-            <Menu.Item key="0">
-                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            <Menu.Item key="0" onClick={()=>setVisible(true)}>
                     个人中心
-            </a>
             </Menu.Item>
             <Menu.Item key="1">
                 <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
@@ -35,6 +41,15 @@ const MyHeader: React.FC = () => {
         </Menu>
     );
 
+    function handleChange(e: any){
+        console.log('e...', e);
+        if (e.file.status === 'done'){
+            let data = e.file.response.data;
+            let index = data.findIndex((item:any)=>item.name==='avatar');
+            setAvatar(data[index].path);
+        }
+    }
+
     return useObserver(()=><Header className="header">
         <img className={styles.img} src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
         <Dropdown overlay={menu}>
@@ -43,6 +58,42 @@ const MyHeader: React.FC = () => {
                 <span>{user.userInfo.user_name} | {user.userInfo.identity_text}</span>
             </div>
         </Dropdown>
+        <Modal
+          title="个人中心"
+          visible={visible}
+          footer={null}
+        //   onOk={this.handleOk}
+          onCancel={()=>setVisible(false)}
+        >
+          <Form initialValues={{...user.userInfo}}>
+              <Form.Item label="用户头像" name="avatar">
+                <Upload
+                    name="avatar"
+                    action="//123.206.55.50:11000/upload"
+                    showUploadList={false}  
+                    onChange={handleChange}
+                    >
+                    <Avatar size={40} src={avatar}>头像</Avatar>
+                </Upload>
+              </Form.Item>
+              <Form.Item label="用户昵称" name="user_name">
+                    <Input placeholder="请输入您的用户名"/>
+                </Form.Item>
+                <Form.Item label="用户 ID" name="user_id">
+                    <Input placeholder="您当前的用户ID" disabled/>
+                </Form.Item>
+                <Form.Item label="用户身份" name="identity_id">
+                    <Select>{
+                        consumer.identifyList.map((item:any,index)=>{
+                            return  <Select.Option key={index} value={item.identity_id}>{item.identity_text}</Select.Option>
+                    })}</Select>
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">确定</Button>
+                    <Button >取消</Button>
+                </Form.Item>
+          </Form>
+        </Modal>
     </Header >)
 }
 

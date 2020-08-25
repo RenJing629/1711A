@@ -14,3 +14,8 @@ export let getUserInfo = ()=>{
 export let getUserViewAuthority = ()=>{
     return request.get('/user/view_Authority');
 }
+
+// 更新用户信息
+export let updateUserInfo = (data:any)=>{
+    return request.put('/user/user', data);
+}

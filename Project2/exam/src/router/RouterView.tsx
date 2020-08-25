@@ -79,7 +79,7 @@ const RouterView: React.FC<IProps> = (props) => {
     return <Switch>{
         props.routes.map((item) => {
             if (item.redirect){
-                return <Redirect key={item.path}  from={item.path} to={item.redirect}></Redirect>
+                return <Redirect exact key={item.path}  from={item.path} to={item.redirect}></Redirect>
             }
 
             return <Route path={item.path} key={item.path} render={routeProps => {
