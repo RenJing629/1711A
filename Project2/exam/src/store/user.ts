@@ -53,7 +53,8 @@ export default class User{
     @action 
     async updateUserInfoAction(data:any){
         let result = await updateUserInfo(data);
-        console.log('result...', result);
+        this.getUserInfoAction();
+        return result;
     }
 
     @action 

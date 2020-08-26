@@ -5,11 +5,13 @@ import useStore from '../../context/useStore'
 import { useObserver } from 'mobx-react-lite';
 
 const { Header } = Layout;
+const { useForm } = Form;
 
 const MyHeader: React.FC = () => {
     let { user, consumer } = useStore();
     let [visible, setVisible] = useState<boolean>(true);
     let [avatar, setAvatar] = useState(user.userInfo.avatar);
+    let [form] = useForm();
 
     let logout = () => {
         user.logoutAction()
@@ -20,7 +22,16 @@ const MyHeader: React.FC = () => {
         consumer.getIdentifyListAction();
     }, []);
 
-    console.log('user...', user.userInfo, consumer.identifyList)
+    // 监听用户信息的获取
+    useEffect(()=>{
+        form.setFieldsValue(user.userInfo)
+        setAvatar(user.userInfo.avatar)
+    }, [user.userInfo]);
+
+    const formItemLayout = {
+        labelCol: { span: 6 },
+        wrapperCol: { span: 14 },
+    };
     const menu = (
         <Menu>
             <Menu.Item key="0" onClick={()=>setVisible(true)}>
@@ -50,11 +61,19 @@ const MyHeader: React.FC = () => {
         }
     }
 
+    function finish(params:any){
+        let data = {...params, avatar}
+        user.updateUserInfoAction(data);
+        setVisible(false);
+    }
+
+    console.log('avatar...', avatar)
+
     return useObserver(()=><Header className="header">
         <img className={styles.img} src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" alt="" />
         <Dropdown overlay={menu}>
             <div>
-                <img className={styles.avatar} src={user.userInfo.avatar} alt="" />
+                <img className={styles.avatar} src={avatar} alt="" />
                 <span>{user.userInfo.user_name} | {user.userInfo.identity_text}</span>
             </div>
         </Dropdown>
@@ -65,7 +84,10 @@ const MyHeader: React.FC = () => {
         //   onOk={this.handleOk}
           onCancel={()=>setVisible(false)}
         >
-          <Form initialValues={{...user.userInfo}}>
+          <Form 
+            form={form}
+            {...formItemLayout}
+            onFinish={finish}>
               <Form.Item label="用户头像" name="avatar">
                 <Upload
                     name="avatar"
@@ -76,7 +98,7 @@ const MyHeader: React.FC = () => {
                     <Avatar size={40} src={avatar}>头像</Avatar>
                 </Upload>
               </Form.Item>
-              <Form.Item label="用户昵称" name="user_name">
+              <Form.Item label="用户昵称" name="user_name" rules={[{required:true, message:'请输入你的用户名'}]}>
                     <Input placeholder="请输入您的用户名"/>
                 </Form.Item>
                 <Form.Item label="用户 ID" name="user_id">
@@ -85,11 +107,11 @@ const MyHeader: React.FC = () => {
                 <Form.Item label="用户身份" name="identity_id">
                     <Select>{
                         consumer.identifyList.map((item:any,index)=>{
-                            return  <Select.Option key={index} value={item.identity_id}>{item.identity_text}</Select.Option>
-                    })}</Select>
+                            return <Select.Option key={index} value={item.identity_id}>{item.identity_text}</Select.Option>
+                    })}</Select>    
                 </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">确定</Button>
+                <Form.Item style={{textAlign: 'center'}}>
+                    <Button type="primary" htmlType="submit" style={{marginRight: 20}}>确定</Button>
                     <Button >取消</Button>
                 </Form.Item>
           </Form>
