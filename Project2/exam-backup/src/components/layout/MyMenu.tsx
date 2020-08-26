@@ -14,7 +14,6 @@ const { SubMenu } = Menu
 const MyMenu: React.FC<any> = (props) => {
   let {formatMessage} = props.intl;
 
-  console.log('formatMessage...', formatMessage);
   let [openKey, setOpenKey] = useState<string>('')
   let [selectKey, setSelectKey] = useState<string>('')
 
@@ -46,10 +45,10 @@ const MyMenu: React.FC<any> = (props) => {
       style={{ height: '100%', borderRight: 0 }}
     >{
       getMyMenu().map((item:any, index:number) => {
-          return <SubMenu key={index} icon={<item.meta.icon/>} title={item.name}>{
+          return <SubMenu key={index} icon={<item.meta.icon/>} title={formatMessage({id: item.name, defaultMessage: item.name})}>{
             item.children.map((value:any) => {
               return value.meta.show && <Menu.Item key={`${value.path}`} onClick={()=>util.addTag({name:value.name, path: value.path})}>
-                <Link to={value.path}> {value.name}</Link>
+                <Link to={value.path}>{formatMessage({id: value.name, defaultMessage: value.name})}</Link>
               </Menu.Item>
             })
           }
