@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from './App.module.css';
 
 // 引入路由配置
 import routerConfig from './router/router';
 import RouterView from './router/RouterView';
-import { IRouterItem } from './utils/interface';
 
 // 引入国际化配置
 import { IntlProvider } from 'react-intl'
@@ -18,10 +17,15 @@ const localeMap = {
 }
 
 function App() {
-  const { lang } = useStore();
+  const { lang, user } = useStore();
+
+  function geneRoutes(){
+    routerConfig.routes[1].children = user.routes;
+    return routerConfig.routes;
+  }
 
   return useObserver(()=><IntlProvider locale={lang.local} messages={localeMap[lang.local as 'en' | 'zh']}>
-    <RouterView routes={routerConfig.routes as IRouterItem[]}></RouterView>
+    <RouterView routes={geneRoutes()}></RouterView>
   </IntlProvider>)
 }
 

@@ -1,19 +1,22 @@
 import {observable, action} from 'mobx'
-import {login, getUserInfo} from '../service'
+import {login, getUserInfo, getUserViewAuthority, updateUserInfo} from '../service'
 import {setToken, removeToken} from '../utils'
 import {useHistory} from 'react-router-dom'
-import { getUserViewAuthority, updateUserInfo } from '../service/user';
 import menus from '../router/menu';
+import { IMenuItem, IRouterItem } from '../utils/interface';
+
 
 export default class User{
     @observable
     isLogin:boolean = false;
     @observable
     userInfo:any = {};
-    @observable
+    // @observable
     userViewAuthority: any = [];    // 用户拥有的视图权限
-    @observable
+    // @observable
     forbiddenViewAuthority: any = [];   // 未授权的视图权限
+    @observable
+    routes: any = [];   // 用户的视图权限生成的路由
 
     isGetUserInfo = false;
     isGetViewAuthority = false;
@@ -71,7 +74,7 @@ export default class User{
             this.isGetViewAuthority = false;
             // 筛选用户拥有的视图权限和未授权的视图权限
             // 1. 拥有的视图权限渲染左边导航菜单
-            // 2. 未授权的试图权限重定向到403页面
+            // 2. 未授权的视图权限重定向到403页面
             var myMenu:any[] = [], forbiddenView:any [] = [];
             menus.forEach(item=>{
                 var children:any[] = [];
@@ -90,6 +93,27 @@ export default class User{
             })
             this.userViewAuthority = myMenu;
             this.forbiddenViewAuthority = forbiddenView;
+            this.routes = this.geneRouter(menus);
+            console.log(".....routes......", this.routes);
         }
+    }
+
+    geneRouter(menus: IMenuItem[]){
+        // 判断有没有获取用户已拥有的权限
+        if (this.userViewAuthority.length){
+            menus = this.userViewAuthority;
+        }
+        let routes: IRouterItem[] = [];
+        menus.forEach(item=>{
+            item.children.forEach(value=>value.component = value.meta.component)
+            routes = routes.concat(item.children as unknown as IRouterItem[]);
+        })
+        // 获取用户未授权的权限
+        if (this.forbiddenViewAuthority.length){
+            this.forbiddenViewAuthority.forEach((item:any)=>{
+                routes.push({path: item.path, redirect: '/403'});
+            })
+        }
+        return routes;
     }
 }

@@ -76,6 +76,7 @@ interface IProps {
 const whiteList = ['/login', '/403', '/404', '/main'];
 const RouterView: React.FC<IProps> = (props) => {
     let {user} = useStore();
+
     return <Switch>{
         props.routes.map((item) => {
             if (item.redirect){
@@ -84,7 +85,6 @@ const RouterView: React.FC<IProps> = (props) => {
 
             return <Route path={item.path} key={item.path} render={routeProps => {
                 // 做导航守卫
-                console.log('routeProps...', routeProps);
                 // 1. 登陆拦截
                 let path = routeProps.match.path;
                 if (!whiteList.includes(path) && !getToken()){

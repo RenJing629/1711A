@@ -3,8 +3,8 @@ import { getToken } from './index';
 import {message} from 'antd'
 
 let instance = axios.create({
-    baseURL: "https://exam.jasonandjay.com/",
-    // baseURL: "",
+    // baseURL: "https://exam.jasonandjay.com/",
+    baseURL: "//127.0.0.1:7002",
     timeout: 3000
 });
 // 添加请求拦截器
