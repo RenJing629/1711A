@@ -80,7 +80,7 @@ const menus = [{
             title: '添加用户',
             show: true,
             component: AddConsumerPage,
-            view_id: "1main-addUser"
+            view_id: "main-addUser"
         },
     },{
         path: '/main/showConsumer',
@@ -89,7 +89,7 @@ const menus = [{
             title: '用户展示',
             show: true,
             component: ShowConsumerPage,
-            view_id: "1main-showUser"
+            view_id: "main-showUser"
         },
     }]
 },{

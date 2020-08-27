@@ -114,6 +114,7 @@ export default class User{
                 routes.push({path: item.path, redirect: '/403'});
             })
         }
+        
         return routes;
     }
 }

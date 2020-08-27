@@ -73,7 +73,7 @@ import { getToken } from '../utils/index';
 interface IProps {
     routes: IRouterItem[]
 }
-const whiteList = ['/login', '/403', '/404', '/main'];
+const whiteList = ['/login', '/403', '/404'];
 const RouterView: React.FC<IProps> = (props) => {
     let {user} = useStore();
 
