@@ -12,7 +12,7 @@ export let getUserInfo = ()=>{
 
 // 获取用户试图权限信息
 export let getUserViewAuthority = ()=>{
-    return request.get('/user/view_Authority');
+    return request.get('/user/view_authority');
 }
 
 // 更新用户信息

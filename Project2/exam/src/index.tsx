@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,25 +10,17 @@ import StoreContext from './context/StoreContext'
 import { HashRouter } from 'react-router-dom'
 // 引入antd全局样式
 import 'antd/dist/antd.css';
-// 引入国际化配置
-import { IntlProvider } from 'react-intl'
-import zhCN from './lang/zh-CN'
-import enUS from './lang/en-US'
-const localeMap = {
-  en: enUS,
-  zh: zhCN
-}
+
 
 ReactDOM.render(
   // <React.StrictMode>
-  <StoreContext.Provider value={store}>
-    <IntlProvider locale={store.lang.local} messages={localeMap[store.lang.local as 'en'|'zh']}>
+  <Suspense fallback={<h1>Loading profile...</h1>}>
+    <StoreContext.Provider value={store}>
       <HashRouter>
         <App />
       </HashRouter>
-    </IntlProvider>
-
-  </StoreContext.Provider>
+    </StoreContext.Provider >
+  </Suspense>
   // </React.StrictMode>
   , document.getElementById('root')
 );
@@ -36,4 +28,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

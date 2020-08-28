@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 
 class Lang{
     @observable
-    local = 'zh'
+    local = 'en'
 
     @action 
     chanegLocale(local: string){

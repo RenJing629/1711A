@@ -1,25 +1,28 @@
 import { UserOutlined, LaptopOutlined, NotificationOutlined, BellOutlined, CommentOutlined } from '@ant-design/icons'
+import React from 'react'
+
 
 // 试题管理
-import AddQuestionPage from '../views/main/question/AddQuestion'
-import ClassifyQuestionPage from '../views/main/question/ClassifyQuestion'
-import QuestionDetailPage from '../views/main/question/QuestionDetail'
-import ViewQuestionPage from '../views/main/question/ViewQuestion'
+const AddQuestionPage = React.lazy(() => import( '../views/main/question/AddQuestion'))
+const ClassifyQuestionPage = React.lazy(() => import( '../views/main/question/ClassifyQuestion'))
+const QuestionDetailPage = React.lazy(() => import( '../views/main/question/QuestionDetail'))
+const ViewQuestionPage = React.lazy(() => import( '../views/main/question/ViewQuestion'))
+
 // 班级管理
-import ClassManagerPage from '../views/main/class/ClassManager'
-import RoomManagerPage from '../views/main/class/RoomManager'
-import StudentManagerPage from '../views/main/class/StudentManager'
+const ClassManagerPage = React.lazy(() => import( '../views/main/class/ClassManager'))
+const RoomManagerPage = React.lazy(() => import( '../views/main/class/RoomManager'))
+const StudentManagerPage = React.lazy(() => import( '../views/main/class/StudentManager'))
 // 用户管理
-import AddConsumerPage from '../views/main/consumer/AddConsumer'
-import ShowConsumerPage from '../views/main/consumer/ShowConsumer'
+const AddConsumerPage = React.lazy(() => import( '../views/main/consumer/AddConsumer'))
+const ShowConsumerPage = React.lazy(() => import( '../views/main/consumer/ShowConsumer'))
 // 试卷管理
-import AddPaperPage from '../views/main/paper/AddPaper'
-import PaperDetailPage from '../views/main/paper/PaperDetail'
-import PaperListPage from '../views/main/paper/PaperList'
+const AddPaperPage = React.lazy(() => import( '../views/main/paper/AddPaper'))
+const PaperDetailPage = React.lazy(() => import( '../views/main/paper/PaperDetail'))
+const PaperListPage = React.lazy(() => import( '../views/main/paper/PaperList'))
 // 阅卷管理
-import MarkingDetailPage from '../views/main/marking/MarkingDetail'
-import MarkingListPage from '../views/main/marking/MarkingList'
-import MarkingStudentListPage from '../views/main/marking/MarkingStudentList'
+const MarkingDetailPage = React.lazy(() => import( '../views/main/marking/MarkingDetail'))
+const MarkingListPage = React.lazy(() => import( '../views/main/marking/MarkingList'))
+const MarkingStudentListPage = React.lazy(() => import( '../views/main/marking/MarkingStudentList'))
 
 
 const menus = [{
@@ -80,7 +83,7 @@ const menus = [{
             title: '添加用户',
             show: true,
             component: AddConsumerPage,
-            view_id: "1main-addUser"
+            view_id: "main-addUser"
         },
     },{
         path: '/main/showConsumer',
@@ -89,7 +92,7 @@ const menus = [{
             title: '用户展示',
             show: true,
             component: ShowConsumerPage,
-            view_id: "1main-showUser"
+            view_id: "main-showUser"
         },
     }]
 },{
