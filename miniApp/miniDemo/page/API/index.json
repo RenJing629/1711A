@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "小程序接口能力展示",
+    "usingComponents": {
+      "set-tab-bar": "/component/set-tab-bar/set-tab-bar" 
+    }
+}

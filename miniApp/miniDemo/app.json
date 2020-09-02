@@ -1,0 +1,52 @@
+{
+  "pages":[
+    "page/component/index",
+    "page/component/pages/view/view",
+
+
+    "page/weui/index",
+    "page/API/index",
+    "page/cloud/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "@tabBarColor",
+    "selectedColor": "@tabBarSelectedColor",
+    "borderStyle": "@tabBarBorderStyle",
+    "backgroundColor": "@tabBarBackgroundColor",
+    "list": [
+      {
+        "pagePath": "page/component/index",
+        "iconPath": "@iconPathComponent",
+        "selectedIconPath": "@selectedIconPathComponent",
+        "text": "组件"
+      },
+      {
+        "pagePath": "page/weui/index",
+        "iconPath": "@iconPathComponent",
+        "selectedIconPath": "@selectedIconPathComponent",
+        "text": "扩展能力"
+      },
+      {
+        "pagePath": "page/API/index",
+        "iconPath": "@iconPathAPI",
+        "selectedIconPath": "@selectedIconPathAPI",
+        "text": "接口"
+      },
+      {
+        "pagePath": "page/cloud/index",
+        "iconPath": "@iconPathCloud",
+        "selectedIconPath": "@selectedIconPathCloud",
+        "text": "云开发"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "themeLocation": "demo.theme.json"
+}
