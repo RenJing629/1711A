@@ -1,10 +1,15 @@
 <template>
     <section>
-        <picker @change="bindChange"  @columnchange="columnChange" :value="time" :range="[formatDays, formatHours, formatMins]" mode="multiSelector">
-             <view class="picker">
-                面试时间{{formatTime}}
-            </view>
-        </picker>
+        <section>
+            <picker @change="bindChange"  @columnchange="columnChange" :value="time" :range="[formatDays, formatHours, formatMins]" mode="multiSelector">
+                <span class="picker">
+                    面试时间{{formatTime}}
+                </span>
+            </picker>
+        </section>
+        <section>
+            <navigator url="/pages/interview/searchAddress">详细地址: </navigator>
+        </section>
     </section>
 </template>
 

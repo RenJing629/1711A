@@ -11,6 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "添加面试"
 			}
+		},
+		{
+			"path": "pages/interview/searchAddress",
+			"style": {
+				"navigationBarTitleText": "搜索地址"
+			}
 		}
 	],
 	"globalStyle": {
