@@ -4,7 +4,7 @@
 			<span>定位</span>
 			<span>我的</span>
     </map>
-    <button>添加面试</button>
+    <navigator class="nav" url="/pages/interview/addInterview">添加面试</navigator>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ map {
   box-sizing: border-box;
   padding-bottom: 100rpx;
 }
-button {
+.nav {
   width: 100%;
   height: 100rpx;
   position: fixed;
